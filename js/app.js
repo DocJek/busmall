@@ -26,6 +26,8 @@ function clickCounter (event) {
   var object = productLineUp.getElWithId(idName);
   object.clicks++;
   console.log(object);
+  img.setAttribute('src', 'images/' + productLineUp[tempRandom].path);
+  img.setAttribute('id', productLineUp[tempRandom].name);
 }
 
 var clickPic = document.getElementById('pic');
@@ -33,7 +35,7 @@ clickPic.addEventListener('click', clickCounter);
 
 
 
-// var currentPics = [];
+// This function stops duplicate images from being printed on the same screen
 function random (array) {
   var temp = Math.floor(Math.random() * productLineUp.length);
   while (array.includes(temp)) {
@@ -42,23 +44,24 @@ function random (array) {
   return temp;
 }
 
-
+// This function renders the pictures on the page on load
 function renderPic () {
   var indexed = [];
   for (var i = 0; i < 3; i++) {
-    var tempRandom = random(indexed);
-    indexed.push(tempRandom);
     var parentEl = document.getElementById('pic');
     var fig = document.createElement('figure');
+    var tempRandom = random(indexed);
+    indexed.push(tempRandom);
     var figcaption = document.createElement('figcaption');
     fig.setAttribute('id', 'fig' + i);
     figcaption.textContent = productLineUp[tempRandom].name;
     var img = document.createElement('img');
     img.setAttribute('src', 'images/' + productLineUp[tempRandom].path);
     img.setAttribute('id', productLineUp[tempRandom].name);
-    parentEl.appendChild(img);
+    fig.appendChild(img);
     parentEl.appendChild(fig);
     fig.appendChild(figcaption);
+    productLineUp[tempRandom].timesShown++;
   }
 }
 
