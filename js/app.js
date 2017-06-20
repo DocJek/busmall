@@ -1,7 +1,8 @@
 'use strict';
 
 var productLineUp = [];
-
+var attempts = 0;
+var maxAttempts = 25;
 
 function Product (name, path) {
   this.name = name;
@@ -25,15 +26,23 @@ function clickCounter (event) {
   var idName = event.target.getAttribute('id');
   var object = productLineUp.getElWithId(idName);
   object.clicks++;
+  object.attempts++;
   console.log(object);
-  img.setAttribute('src', 'images/' + productLineUp[tempRandom].path);
-  img.setAttribute('id', productLineUp[tempRandom].name);
+  sect = document.getElementById('pic');
+  sect.removeChild(pic.figure);
+  renderPic();
 }
 
 var clickPic = document.getElementById('pic');
 clickPic.addEventListener('click', clickCounter);
 
-
+var stopClick = document.getElementById('pic');
+stopClick.addEventListener('click',
+function () {
+  if (attempts === maxAttempts) {
+    return;
+  }
+});
 
 // This function stops duplicate images from being printed on the same screen
 function random (array) {
@@ -49,18 +58,20 @@ function renderPic () {
   var indexed = [];
   for (var i = 0; i < 3; i++) {
     var parentEl = document.getElementById('pic');
+    var article = document.createElement('article');
     var fig = document.createElement('figure');
+    var img = document.createElement('img');
     var tempRandom = random(indexed);
     indexed.push(tempRandom);
     var figcaption = document.createElement('figcaption');
     fig.setAttribute('id', 'fig' + i);
     figcaption.textContent = productLineUp[tempRandom].name;
-    var img = document.createElement('img');
     img.setAttribute('src', 'images/' + productLineUp[tempRandom].path);
     img.setAttribute('id', productLineUp[tempRandom].name);
-    fig.appendChild(img);
-    parentEl.appendChild(fig);
     fig.appendChild(figcaption);
+    fig.appendChild(img);
+    article.appendChild(figure);
+    parentEl.appendChild(article);
     productLineUp[tempRandom].timesShown++;
   }
 }
