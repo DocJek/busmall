@@ -48,7 +48,7 @@ function random (array) {
   }
   return temp;
 }
-var previouslyViewed = [];
+var previouslyViewed = [null, null, null];
 
 function renderPic () {
   var indexed = previouslyViewed;
@@ -68,11 +68,7 @@ function renderPic () {
     parentEl.appendChild(fig);
     productLineUp[tempRandom].timesShown++;
   }
-  if (indexed.length === 6) {
-    previouslyViewed = indexed.slice(2,5);
-  } else if (indexed.length < 6) {
-    previouslyViewed = indexed;
-  }
+  previouslyViewed = indexed.slice(2,5);
 }
 
 
