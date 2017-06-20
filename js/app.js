@@ -1,8 +1,7 @@
 'use strict';
 
 var productLineUp = [];
-var attempts = 0;
-var maxAttempts = 25;
+
 
 function Product (name, path) {
   this.name = name;
@@ -12,6 +11,7 @@ function Product (name, path) {
   productLineUp.push(this);
 }
 
+// Checks to see if duplication is happening on current set of pics
 productLineUp.getElWithId = function(id) {
   for (var ii = 0; ii < productLineUp.length; ii++) {
     var obj = productLineUp[ii];
@@ -26,25 +26,21 @@ function clickCounter (event) {
   var idName = event.target.getAttribute('id');
   var object = productLineUp.getElWithId(idName);
   object.clicks++;
-  object.attempts++;
   console.log(object);
-  sect = document.getElementById('pic');
-  sect.removeChild(pic.figure);
+  var obj = document.getElementById('pic');
+  console.log(obj);
+  obj.removeChild(document.getElementById('fig0'));
+  obj.removeChild(document.getElementById('fig1'));
+  obj.removeChild(document.getElementById('fig2'));
   renderPic();
 }
 
 var clickPic = document.getElementById('pic');
 clickPic.addEventListener('click', clickCounter);
 
-var stopClick = document.getElementById('pic');
-stopClick.addEventListener('click',
-function () {
-  if (attempts === maxAttempts) {
-    return;
-  }
-});
 
-// This function stops duplicate images from being printed on the same screen
+
+
 function random (array) {
   var temp = Math.floor(Math.random() * productLineUp.length);
   while (array.includes(temp)) {
@@ -53,25 +49,23 @@ function random (array) {
   return temp;
 }
 
-// This function renders the pictures on the page on load
+
 function renderPic () {
   var indexed = [];
   for (var i = 0; i < 3; i++) {
-    var parentEl = document.getElementById('pic');
-    var article = document.createElement('article');
-    var fig = document.createElement('figure');
-    var img = document.createElement('img');
     var tempRandom = random(indexed);
-    indexed.push(tempRandom);
+    var parentEl = document.getElementById('pic');
+    var fig = document.createElement('figure');
     var figcaption = document.createElement('figcaption');
+    var img = document.createElement('img');
+    indexed.push(tempRandom);
     fig.setAttribute('id', 'fig' + i);
     figcaption.textContent = productLineUp[tempRandom].name;
     img.setAttribute('src', 'images/' + productLineUp[tempRandom].path);
     img.setAttribute('id', productLineUp[tempRandom].name);
-    fig.appendChild(figcaption);
     fig.appendChild(img);
-    article.appendChild(figure);
-    parentEl.appendChild(article);
+    fig.appendChild(figcaption);
+    parentEl.appendChild(fig);
     productLineUp[tempRandom].timesShown++;
   }
 }
