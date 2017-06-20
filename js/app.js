@@ -48,10 +48,10 @@ function random (array) {
   }
   return temp;
 }
-
+var previouslyViewed = [];
 
 function renderPic () {
-  var indexed = [];
+  var indexed = previouslyViewed;
   for (var i = 0; i < 3; i++) {
     var tempRandom = random(indexed);
     var parentEl = document.getElementById('pic');
@@ -67,6 +67,11 @@ function renderPic () {
     fig.appendChild(figcaption);
     parentEl.appendChild(fig);
     productLineUp[tempRandom].timesShown++;
+  }
+  if (indexed.length === 6) {
+    previouslyViewed = indexed.slice(2,5);
+  } else if (indexed.length < 6) {
+    previouslyViewed = indexed;
   }
 }
 
