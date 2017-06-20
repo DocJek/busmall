@@ -18,12 +18,21 @@ function Product (name, path) {
 //   }
 // }
 
-
+// var currentPics = [];
+function random (array) {
+  var temp = Math.floor(Math.random() * productLineUp.length);
+  while (array.includes(temp)) {
+    temp = Math.floor(Math.random() * productLineUp.length);
+  }
+  return temp;
+}
 
 
 function renderPic () {
+  var indexed = [];
   for (var i = 0; i < 3; i++) {
-    var tempRandom = Math.floor(Math.random() * productLineUp.length);
+    var tempRandom = random(indexed);
+    indexed.push(tempRandom);
     var parentEl = document.getElementById('pic');
     var fig = document.createElement('figure');
     var figcaption = document.createElement('figcaption');
