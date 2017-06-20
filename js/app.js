@@ -1,27 +1,42 @@
 'use strict';
 
-var productObj = [];
+var productLineUp = [];
 
-function randPic() {
-  return Math.floor(Math.random() * productObj.length);
-}
 
 function Product (name, path) {
   this.name = name;
   this.path = path;
   this.clicks = 0;
   this.timesShown = 0;
-  this.productLineUp = productLineUp;
-  productObj.push(this);
+  productLineUp.push(this);
 }
 
+// This will be used to prevent back to back picture repeats
+// function checkPriorSet(name) {
+//   if (productLineUp.contains(name)) {
+//     //replace pic with one not used in last set
+//   }
+// }
 
-var parentEl = document.getElementById('pic');
 
-function renderPic (path) {
-  var img1 = document.createElement('img');
-  img1.setAttribute('images/' + path);
-  parentEl.appendChild(img1);
+
+
+function renderPic () {
+  for (var i = 0; i < 3; i++) {
+    var tempRandom = Math.floor(Math.random() * productLineUp.length);
+    var parentEl = document.getElementById('pic');
+    var fig = document.createElement('figure');
+    var figcaption = document.createElement('figcaption');
+    fig.setAttribute('id', 'fig' + i);
+    figcaption.textContent = productLineUp[tempRandom].name;
+    var img = document.createElement('img');
+    console.log('productLineUp');
+    console.log(productLineUp[tempRandom]);
+    img.setAttribute('src', 'images/' + productLineUp[tempRandom].path);
+    parentEl.appendChild(img);
+    parentEl.appendChild(fig);
+    fig.appendChild(figcaption);
+  }
 }
 
 
@@ -39,11 +54,12 @@ var pen = new Product ('pen utensils', 'pen.jpg');
 var pet_sweep = new Product ('sweeper feet for pets', 'pet-sweep.jpg');
 var scissors = new Product ('pizza scissors', 'scissors.jpg');
 var shark = new Product ('shark sleeping bag', 'shark.jpg');
-var sweep = new Product ('baby sweeper', 'sweep.png');
+var sweep = new Product ('baby sweeper onesie', 'sweep.png');
 var tauntaun = new Product ('tauntaun sleeping bag', 'tauntaun.jpg');
 var unicorn = new Product ('can of unicorn meat', 'unicorn.jpg');
 var usb = new Product ('moving tentacle usb', 'usb.gif');
 var water_can = new Product ('self filling water can', 'water-can.jpg');
-var wine_glass = new Product ('egg shaped wine glass', 'wine-glass');
+var wine_glass = new Product ('egg shaped wine glass', 'wine-glass.jpg');
 
-renderPic('bag.jpg');
+
+renderPic();
