@@ -1,7 +1,8 @@
 'use strict';
 
 var productLineUp = [];
-
+var maxClicks = 25;
+var totalClicks = 0;
 
 function Product (name, path) {
   this.name = name;
@@ -11,7 +12,6 @@ function Product (name, path) {
   productLineUp.push(this);
 }
 
-// Checks to see if duplication is happening on current set of pics
 productLineUp.getElWithId = function(id) {
   for (var ii = 0; ii < productLineUp.length; ii++) {
     var obj = productLineUp[ii];
@@ -23,12 +23,15 @@ productLineUp.getElWithId = function(id) {
 };
 
 function clickCounter (event) {
+  if (totalClicks === maxClicks) {
+    return;
+  }
   var idName = event.target.getAttribute('id');
   var object = productLineUp.getElWithId(idName);
   object.clicks++;
+  totalClicks++;
   console.log(object);
   var obj = document.getElementById('pic');
-  console.log(obj);
   obj.removeChild(document.getElementById('fig0'));
   obj.removeChild(document.getElementById('fig1'));
   obj.removeChild(document.getElementById('fig2'));
@@ -37,8 +40,6 @@ function clickCounter (event) {
 
 var clickPic = document.getElementById('pic');
 clickPic.addEventListener('click', clickCounter);
-
-
 
 
 function random (array) {
