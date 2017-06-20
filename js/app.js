@@ -11,12 +11,27 @@ function Product (name, path) {
   productLineUp.push(this);
 }
 
-// This will be used to prevent back to back picture repeats
-// function checkPriorSet(name) {
-//   if (productLineUp.contains(name)) {
-//     //replace pic with one not used in last set
-//   }
-// }
+productLineUp.getElWithId = function(id) {
+  for (var ii = 0; ii < productLineUp.length; ii++) {
+    var obj = productLineUp[ii];
+    if (obj.name === id) {
+      return obj;
+    }
+  }
+  console.log('Could not find id');
+};
+
+function clickCounter (event) {
+  var idName = event.target.getAttribute('id');
+  var object = productLineUp.getElWithId(idName);
+  object.clicks++;
+  console.log(object);
+}
+
+var clickPic = document.getElementById('pic');
+clickPic.addEventListener('click', clickCounter);
+
+
 
 // var currentPics = [];
 function random (array) {
@@ -39,9 +54,8 @@ function renderPic () {
     fig.setAttribute('id', 'fig' + i);
     figcaption.textContent = productLineUp[tempRandom].name;
     var img = document.createElement('img');
-    console.log('productLineUp');
-    console.log(productLineUp[tempRandom]);
     img.setAttribute('src', 'images/' + productLineUp[tempRandom].path);
+    img.setAttribute('id', productLineUp[tempRandom].name);
     parentEl.appendChild(img);
     parentEl.appendChild(fig);
     fig.appendChild(figcaption);
