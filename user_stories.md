@@ -29,3 +29,11 @@
 - A front-end site for focus group, and back-end site for market research team's reporting requirements.
 
 - Program logic to obtain number of clicks per picture and prevents repeated images from populating.
+
+### MVPs
+
+- Program logic to obtain number of clicks per picture and prevent images that were just previously shown from popping up again.
+
+- Put together a pretty site that's attractive enough for focus group users
+
+- Make a status bar to show progress through survey.
