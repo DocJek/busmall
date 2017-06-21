@@ -4,16 +4,7 @@ var productLineUp = [];
 var maxClicks = 25;
 var totalClicks = 0;
 
-function renderStats() {
-  var parentSection = document.getElementById('stats');
-  var ul = document.createElement('ul');
-  var li = document.createElement('li');
-  parentSection.appendChild('ul');
-  ul.appendChild('li');
-  while (e < productLineUp.length) {
-    li.textContent = productLineUp[e].clicks;
-  }
-}
+
 
 function Product (name, path) {
   this.name = name;
@@ -32,19 +23,26 @@ productLineUp.getElWithId = function(id) {
   }
   console.log('Could not find id');
 };
-// function renderStats () {
-// var parent = document.getElementById('stats');
-// var ul = document.createElement('ul');
-// var li = document.createElement('li');
-// parent.appendChild(ul);
-// ul.appendChild(li);
-// li.textContent =
-// }
+
+function renderStats () {
+  var parent = document.getElementById('stats');
+  var ul = document.createElement('ul');
+  var li = document.createElement('li');
+  parent.appendChild(ul);
+  ul.appendChild(li);
+  console.log(productLineUp);
+  for (var ee = 0; ee < 20; ee++) {
+    li.textContent = productLineUp[ee].name + ' was clicked ' + productLineUp[ee].clicks + ' time(s). And shown ' + productLineUp[ee].timesShown + ' time(s).';
+    li = document.createElement('li');
+    ul.appendChild(li);
+  }
+}
 
 function clickCounter (event) {
   if (totalClicks === maxClicks) {
     clickPic.removeEventListener('click', clickCounter);
     console.table(productLineUp);
+    renderStats();
     return;
   }
   var idName = event.target.getAttribute('id');
@@ -92,25 +90,25 @@ function renderPic () {
   previouslyViewed = indexed.slice(2,5);
 }
 
-var bag = new Product ('R2D2 travel bag', 'bag.jpg');
-var banana = new Product ('banana slicer', 'banana.jpg');
-var bathroom = new Product ('toilet tablet holder', 'bathroom.jpg');
-var boots = new Product ('open toe rainboots', 'boots.jpg');
-var breakfast = new Product ('breakfast station', 'breakfast.jpg');
-var bubblegum = new Product ('meatball bubblegum', 'bubblegum.jpg');
-var chair = new Product ('bulbchair', 'chair.jpg');
-var cthulhu = new Product ('cthulhu', 'cthulhu.jpg');
-var dog_duck = new Product ('duck bill for dog', 'dog-duck.jpg');
-var dragon = new Product ('can of dragon meat', 'dragon.jpg');
-var pen = new Product ('pen utensils', 'pen.jpg');
-var pet_sweep = new Product ('sweeper feet for pets', 'pet-sweep.jpg');
-var scissors = new Product ('pizza scissors', 'scissors.jpg');
-var shark = new Product ('shark sleeping bag', 'shark.jpg');
-var sweep = new Product ('baby sweeper onesie', 'sweep.png');
-var tauntaun = new Product ('tauntaun sleeping bag', 'tauntaun.jpg');
-var unicorn = new Product ('can of unicorn meat', 'unicorn.jpg');
-var usb = new Product ('moving tentacle usb', 'usb.gif');
-var water_can = new Product ('self filling water can', 'water-can.jpg');
-var wine_glass = new Product ('egg shaped wine glass', 'wine-glass.jpg');
+var bag = new Product ('R2D2 Travel Bag', 'bag.jpg');
+var banana = new Product ('Banana Slicer', 'banana.jpg');
+var bathroom = new Product ('Toilet Tablet Holder', 'bathroom.jpg');
+var boots = new Product ('Open Toe Rainboots', 'boots.jpg');
+var breakfast = new Product ('Breakfast Station', 'breakfast.jpg');
+var bubblegum = new Product ('Meatball Bubblegum', 'bubblegum.jpg');
+var chair = new Product ('Bulbchair', 'chair.jpg');
+var cthulhu = new Product ('Cthulhu', 'cthulhu.jpg');
+var dog_duck = new Product ('Duck Bill Muzzle', 'dog-duck.jpg');
+var dragon = new Product ('Can of Dragon Meat', 'dragon.jpg');
+var pen = new Product ('Pen Utensils', 'pen.jpg');
+var pet_sweep = new Product ('Sweeper Feet for Pets', 'pet-sweep.jpg');
+var scissors = new Product ('Pizza Scissors', 'scissors.jpg');
+var shark = new Product ('Shark Sleeping Bag', 'shark.jpg');
+var sweep = new Product ('Baby Sweeper Onesie', 'sweep.png');
+var tauntaun = new Product ('Tauntaun Sleeping Bag', 'tauntaun.jpg');
+var unicorn = new Product ('Can of Unicorn Meat', 'unicorn.jpg');
+var usb = new Product ('Moving Tentacle USB', 'usb.gif');
+var water_can = new Product ('Pointless Water Can', 'water-can.jpg');
+var wine_glass = new Product ('Egg Shaped Wine Glass', 'wine-glass.jpg');
 
 renderPic();
