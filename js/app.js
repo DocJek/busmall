@@ -29,14 +29,26 @@ function renderStats () {
   var ul = document.createElement('ul');
   var li = document.createElement('li');
   parent.appendChild(ul);
-  ul.appendChild(li);
   console.log(productLineUp);
-  for (var ee = 0; ee < 20; ee++) {
-    li.textContent = productLineUp[ee].name + ' was clicked ' + productLineUp[ee].clicks + ' time(s). And shown ' + productLineUp[ee].timesShown + ' time(s).';
-    li = document.createElement('li');
-    ul.appendChild(li);
+  for (var ee = 0; ee < productLineUp.length; ee++) {
+    busMallRadar();
+    // ul.appendChild(li);
+    // li.textContent = productLineUp[ee].name + ' was clicked ' + productLineUp[ee].clicks + ' time(s). And shown ' + productLineUp[ee].timesShown + ' time(s).';
+    // li = document.createElement('li');
   }
 }
+
+var busMallRadar = new Chart(ctx, {
+  type: 'radar',
+  data: {
+    labels: [productLineUp[ee].name],
+    datasets: {[
+      lineTension 0,
+      data: [productLineUp[ee].clicks, productLineUp[ee].timesShown]
+    ]}
+  }
+});
+
 
 function clickCounter (event) {
   if (totalClicks === maxClicks) {

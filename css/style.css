@@ -17,6 +17,7 @@ body {
   background-image: url('../images/blueburst.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 #pic * {
