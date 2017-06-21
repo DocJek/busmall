@@ -4,6 +4,17 @@ var productLineUp = [];
 var maxClicks = 25;
 var totalClicks = 0;
 
+function renderStats() {
+  var parentSection = document.getElementById('stats');
+  var ul = document.createElement('ul');
+  var li = document.createElement('li');
+  parentSection.appendChild('ul');
+  ul.appendChild('li');
+  while (e < productLineUp.length) {
+    li.textContent = productLineUp[e].clicks;
+  }
+}
+
 function Product (name, path) {
   this.name = name;
   this.path = path;
@@ -21,9 +32,19 @@ productLineUp.getElWithId = function(id) {
   }
   console.log('Could not find id');
 };
+// function renderStats () {
+// var parent = document.getElementById('stats');
+// var ul = document.createElement('ul');
+// var li = document.createElement('li');
+// parent.appendChild(ul);
+// ul.appendChild(li);
+// li.textContent =
+// }
 
 function clickCounter (event) {
   if (totalClicks === maxClicks) {
+    clickPic.removeEventListener('click', clickCounter);
+    console.table(productLineUp);
     return;
   }
   var idName = event.target.getAttribute('id');
@@ -40,7 +61,6 @@ function clickCounter (event) {
 
 var clickPic = document.getElementById('pic');
 clickPic.addEventListener('click', clickCounter);
-
 
 function random (array) {
   var temp = Math.floor(Math.random() * productLineUp.length);
@@ -72,7 +92,6 @@ function renderPic () {
   previouslyViewed = indexed.slice(2,5);
 }
 
-
 var bag = new Product ('R2D2 travel bag', 'bag.jpg');
 var banana = new Product ('banana slicer', 'banana.jpg');
 var bathroom = new Product ('toilet tablet holder', 'bathroom.jpg');
@@ -93,6 +112,5 @@ var unicorn = new Product ('can of unicorn meat', 'unicorn.jpg');
 var usb = new Product ('moving tentacle usb', 'usb.gif');
 var water_can = new Product ('self filling water can', 'water-can.jpg');
 var wine_glass = new Product ('egg shaped wine glass', 'wine-glass.jpg');
-
 
 renderPic();
