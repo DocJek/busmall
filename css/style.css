@@ -1,7 +1,11 @@
 img {
   width: 200px;
   height: 200px;
-  margin: 10px;
+  margin: 5px;
+}
+
+ul {
+  background-color: hsla(270, 100%, 100%, 0.5);
 }
 
 header {
@@ -13,6 +17,7 @@ body {
   background-image: url('../images/blueburst.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 #pic * {
