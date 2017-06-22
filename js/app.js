@@ -3,8 +3,10 @@
 var productLineUp = [];
 var maxClicks = 25;
 var totalClicks = 0;
-
-
+var chartLabels = [];
+var clicks = [];
+var views = [];
+var ctx = document.createElement('canvas');
 
 function Product (name, path) {
   this.name = name;
@@ -12,6 +14,7 @@ function Product (name, path) {
   this.clicks = 0;
   this.timesShown = 0;
   productLineUp.push(this);
+  chartLabels.push(this.name);
 }
 
 productLineUp.getElWithId = function(id) {
@@ -25,30 +28,50 @@ productLineUp.getElWithId = function(id) {
 };
 
 function renderStats () {
-  var parent = document.getElementById('stats');
-  var ul = document.createElement('ul');
-  var li = document.createElement('li');
-  parent.appendChild(ul);
   console.log(productLineUp);
-  for (var ee = 0; ee < productLineUp.length; ee++) {
-    busMallRadar();
+  var parentSect = document.getElementById('stats');
+  parentSect.appendChild(ctx);
+  ctx.setAttribute('id', 'chart');
+  ctx = document.getElementById('chart').getContext('2d');
+  busMallBarChart();
+}
     // ul.appendChild(li);
     // li.textContent = productLineUp[ee].name + ' was clicked ' + productLineUp[ee].clicks + ' time(s). And shown ' + productLineUp[ee].timesShown + ' time(s).';
     // li = document.createElement('li');
-  }
+
+    // for (var ee = 0; ee < productLineUp.length; ee++) {
+
+function busMallBarChart() {
+  generateChartData();
+  var marketChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: chartLabels,
+      datasets: [{
+        label: 'times clicked',
+        data: clicks,
+        backgroundColor: 'green',
+        borderColor: 'purple',
+        borderWidth: 3
+      },{
+        label: 'times shown',
+        data: views,
+        backgroundColor: 'purple',
+        borderColor: 'green',
+        borderWidth: 3
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
 }
-
-var busMallRadar = new Chart(ctx, {
-  type: 'radar',
-  data: {
-    labels: [productLineUp[ee].name],
-    datasets: {[
-      lineTension 0,
-      data: [productLineUp[ee].clicks, productLineUp[ee].timesShown]
-    ]}
-  }
-});
-
 
 function clickCounter (event) {
   if (totalClicks === maxClicks) {
@@ -100,6 +123,13 @@ function renderPic () {
     productLineUp[tempRandom].timesShown++;
   }
   previouslyViewed = indexed.slice(2,5);
+}
+
+function generateChartData (){
+  for (var ee = 0; ee < productLineUp.length; ee++) {
+    clicks.push(productLineUp[ee].clicks);
+    views.push(productLineUp[ee].timesShown);
+  }
 }
 
 var bag = new Product ('R2D2 Travel Bag', 'bag.jpg');
