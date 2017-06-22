@@ -13,11 +13,10 @@ function Product (name, path) {
   this.path = path;
   this.clicks = 0;
   this.timesShown = 0;
-  productLineUp.push(this);
   chartLabels.push(this.name);
 }
 
-productLineUp.getElWithId = function(id) {
+function getElWithId (id) {
   for (var ii = 0; ii < productLineUp.length; ii++) {
     var obj = productLineUp[ii];
     if (obj.name === id) {
@@ -35,11 +34,7 @@ function renderStats () {
   ctx = document.getElementById('chart').getContext('2d');
   busMallBarChart();
 }
-    // ul.appendChild(li);
-    // li.textContent = productLineUp[ee].name + ' was clicked ' + productLineUp[ee].clicks + ' time(s). And shown ' + productLineUp[ee].timesShown + ' time(s).';
-    // li = document.createElement('li');
 
-    // for (var ee = 0; ee < productLineUp.length; ee++) {
 
 function busMallBarChart() {
   generateChartData();
@@ -78,10 +73,11 @@ function clickCounter (event) {
     clickPic.removeEventListener('click', clickCounter);
     console.table(productLineUp);
     renderStats();
+    saveStorage();
     return;
   }
   var idName = event.target.getAttribute('id');
-  var object = productLineUp.getElWithId(idName);
+  var object = getElWithId(idName);
   object.clicks++;
   totalClicks++;
   console.log(object);
@@ -153,4 +149,35 @@ var usb = new Product ('Moving Tentacle USB', 'usb.gif');
 var water_can = new Product ('Pointless Water Can', 'water-can.jpg');
 var wine_glass = new Product ('Egg Shaped Wine Glass', 'wine-glass.jpg');
 
+var productArray = [
+  bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dog_duck, dragon, pen, pet_sweep, scissors, shark, sweep, tauntaun, unicorn, usb, water_can, wine_glass
+];
+
+function loadStorage () {
+  if (localStorage) {
+    try {
+      var clickString = localStorage.getItem('clickKey');
+      var tempClick = JSON.parse(clickString);
+      if (clickString && tempClick) {
+        productLineUp = tempClick;
+      } else {
+        productLineUp = productArray;
+      }
+    } catch(e) {
+      productLineUp = productArray;
+    }
+  }
+}
+
+function saveStorage () {
+  try {
+    var stringyClicks = JSON.stringify(productLineUp);
+    localStorage.setItem('clickKey', stringyClicks);
+  } catch (e) {
+    console.log(e);
+  }
+
+}
+loadStorage();
 renderPic();
+saveStorage();
