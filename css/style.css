@@ -20,6 +20,10 @@ body {
   background-attachment: fixed;
 }
 
+canvas {
+  background-color: white;
+}
+
 #pic * {
   display: inline;
 }
