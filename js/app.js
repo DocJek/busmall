@@ -26,6 +26,7 @@ function getElWithId (id) {
   console.log('Could not find id');
 };
 
+// actually renders built bar graph on page
 function renderStats () {
   console.log(productLineUp);
   var parentSect = document.getElementById('stats');
@@ -35,7 +36,7 @@ function renderStats () {
   busMallBarChart();
 }
 
-
+// function to build bar graph
 function busMallBarChart() {
   generateChartData();
   var marketChart = new Chart(ctx, {
@@ -68,6 +69,7 @@ function busMallBarChart() {
   });
 }
 
+// tallies clicks on each
 function clickCounter (event) {
   if (totalClicks === maxClicks) {
     clickPic.removeEventListener('click', clickCounter);
@@ -88,9 +90,11 @@ function clickCounter (event) {
   renderPic();
 }
 
+// 'listens' for click to start click counter function
 var clickPic = document.getElementById('pic');
 clickPic.addEventListener('click', clickCounter);
 
+// makes sure no pics are repeated on same set
 function random (array) {
   var temp = Math.floor(Math.random() * productLineUp.length);
   while (array.includes(temp)) {
@@ -100,6 +104,7 @@ function random (array) {
 }
 var previouslyViewed = [null, null, null];
 
+// Renders the pictures on the page
 function renderPic () {
   var indexed = previouslyViewed;
   for (var i = 0; i < 3; i++) {
@@ -113,6 +118,7 @@ function renderPic () {
     figcaption.textContent = productLineUp[tempRandom].name;
     img.setAttribute('src', 'images/' + productLineUp[tempRandom].path);
     img.setAttribute('id', productLineUp[tempRandom].name);
+    img.setAttribute('class', 'blur');
     fig.appendChild(img);
     fig.appendChild(figcaption);
     parentEl.appendChild(fig);
@@ -128,6 +134,7 @@ function generateChartData (){
   }
 }
 
+// feeds to constructor to start building objects
 var bag = new Product ('R2D2 Travel Bag', 'bag.jpg');
 var banana = new Product ('Banana Slicer', 'banana.jpg');
 var bathroom = new Product ('Toilet Tablet Holder', 'bathroom.jpg');
@@ -153,6 +160,7 @@ var productArray = [
   bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dog_duck, dragon, pen, pet_sweep, scissors, shark, sweep, tauntaun, unicorn, usb, water_can, wine_glass
 ];
 
+// loads any local storage to the page, or if no local storage available, changes productLineUp value to productArray to get ready to start saving data.
 function loadStorage () {
   if (localStorage) {
     try {
