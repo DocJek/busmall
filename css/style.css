@@ -16,8 +16,14 @@ img.blur:hover {
 }
 
 header {
+  border: 2px solid blue;
   background-color: hsla(270, 100%, 100%, 0.5);
   width: 400px;
+  padding: 10px;
+}
+
+h1 {
+  font-family: 'Permanent Marker', cursive;
 }
 
 body {
@@ -28,6 +34,7 @@ body {
 }
 
 canvas {
+  border: 2px solid blue;
   background-color: white;
 }
 
@@ -47,6 +54,9 @@ figure {
 }
 
 figcaption {
-  display: table-row;
+  font-family: 'MS Comic Sans', sans-serif;
+  font-weight: bold;
+  padding: 5px;
+  border: 2px solid blue;
   background-color: hsla(270, 100%, 100%, 0.5);
 }
