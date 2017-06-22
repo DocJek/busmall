@@ -1,11 +1,18 @@
 img {
-  width: 200px;
+  width: 100%;
   height: 200px;
-  margin: 5px;
+  margin: 10px;
+  border: 5px solid blue;
 }
 
-ul {
-  background-color: hsla(270, 100%, 100%, 0.5);
+img.blur {
+  transition: all 1s ease;
+}
+
+img.blur:hover {
+  border-radius: 50%;
+  transform: rotate(360deg);
+  filter: blur(5px);
 }
 
 header {
@@ -24,10 +31,22 @@ canvas {
   background-color: white;
 }
 
-#pic * {
-  display: inline;
+#pic {
+  display: inline-flex;
+}
+
+section {
+  width: 100%;
+  justify-content: space-between;
+}
+
+figure {
+  width: 200px;
+  height: 200px;
+  display: block;
 }
 
 figcaption {
+  display: table-row;
   background-color: hsla(270, 100%, 100%, 0.5);
 }
