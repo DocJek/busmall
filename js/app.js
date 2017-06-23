@@ -39,7 +39,7 @@ function renderStats () {
 // function to build bar graph
 function busMallBarChart() {
   generateChartData();
-  var marketChart = new Chart(ctx, {
+  marketChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: chartLabels,
@@ -184,8 +184,8 @@ function saveStorage () {
   } catch (e) {
     console.log(e);
   }
-
 }
+
 loadStorage();
 renderPic();
 saveStorage();
