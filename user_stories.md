@@ -38,6 +38,6 @@
 
 - Market team wants chart of stats to pop up after user finishes going through pictures(25 tries)
 
-### Stretch Goals
+### Stretch Goal
 
 - Make a status bar to show progress through survey.
