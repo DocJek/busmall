@@ -28,7 +28,6 @@ function getElWithId (id) {
 
 // actually renders built bar graph on page
 function renderStats () {
-  console.log(productLineUp);
   var parentSect = document.getElementById('stats');
   parentSect.appendChild(ctx);
   ctx.setAttribute('id', 'chart');
@@ -36,10 +35,23 @@ function renderStats () {
   busMallBarChart();
 }
 
+function renderList () {
+  var parent = document.getElementById('list');
+  var ul = document.createElement('ul');
+  var li = document.createElement('li');
+  parent.appendChild(ul);
+  console.log(productLineUp);
+  for (var ee = 0; ee < productLineUp.length; ee++) {
+    ul.appendChild(li);
+    li.textContent = productLineUp[ee].name + ' was clicked ' + productLineUp[ee].clicks + ' time(s). And shown ' + productLineUp[ee].timesShown + ' time(s).';
+    li = document.createElement('li');
+  }
+}
+
 // function to build bar graph
 function busMallBarChart() {
   generateChartData();
-  var marketChart = new Chart(ctx, {
+  marketChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: chartLabels,
@@ -73,10 +85,10 @@ function busMallBarChart() {
 function clickCounter (event) {
   if (totalClicks === maxClicks) {
     clickPic.removeEventListener('click', clickCounter);
-    console.table(productLineUp);
+    renderList();
     renderStats();
     saveStorage();
-    return;
+    // return;
   }
   var idName = event.target.getAttribute('id');
   var object = getElWithId(idName);
@@ -102,7 +114,7 @@ function random (array) {
   }
   return temp;
 }
-var previouslyViewed = [null, null, null];
+var previouslyViewed = [];
 
 // Renders the pictures on the page
 function renderPic () {
@@ -124,7 +136,11 @@ function renderPic () {
     parentEl.appendChild(fig);
     productLineUp[tempRandom].timesShown++;
   }
-  previouslyViewed = indexed.slice(2,5);
+  if (indexed.length === 6) {
+    previouslyViewed = indexed.slice(2,5);
+  } else if (indexed.length < 6) {
+    previouslyViewed = indexed;
+  }
 }
 
 function generateChartData (){
@@ -186,6 +202,7 @@ function saveStorage () {
   }
 
 }
+
 loadStorage();
 renderPic();
 saveStorage();
