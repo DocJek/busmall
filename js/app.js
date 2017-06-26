@@ -8,6 +8,7 @@ var clicks = [];
 var views = [];
 var ctx = document.createElement('canvas');
 
+// Product constructor function
 function Product (name, path) {
   this.name = name;
   this.path = path;
@@ -86,7 +87,6 @@ function clickCounter (event) {
     renderList();
     renderStats();
     saveStorage();
-    // return;
   }
   var idName = event.target.getAttribute('id');
   var object = getElWithId(idName);
