@@ -23,7 +23,6 @@ function getElWithId (id) {
       return obj;
     }
   }
-  console.log('Could not find id');
 };
 
 // actually renders built bar graph on page
@@ -40,7 +39,6 @@ function renderList () {
   var ul = document.createElement('ul');
   var li = document.createElement('li');
   parent.appendChild(ul);
-  console.log(productLineUp);
   for (var ee = 0; ee < productLineUp.length; ee++) {
     ul.appendChild(li);
     li.textContent = productLineUp[ee].name + ' was clicked ' + productLineUp[ee].clicks + ' time(s). And shown ' + productLineUp[ee].timesShown + ' time(s).';
@@ -94,7 +92,6 @@ function clickCounter (event) {
   var object = getElWithId(idName);
   object.clicks++;
   totalClicks++;
-  console.log(object);
   var obj = document.getElementById('pic');
   obj.removeChild(document.getElementById('fig0'));
   obj.removeChild(document.getElementById('fig1'));
@@ -198,7 +195,6 @@ function saveStorage () {
     var stringyClicks = JSON.stringify(productLineUp);
     localStorage.setItem('clickKey', stringyClicks);
   } catch (e) {
-    console.log(e);
   }
 
 }
